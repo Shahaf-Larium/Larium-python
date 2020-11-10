@@ -11,4 +11,4 @@ cassandra-driver~=3.24.0
 pytz~=2020.1
 iso8601~=0.1.13
 gunicorn
-Flask-Cors=3.0.9
+Flask-Cors==3.0.9
