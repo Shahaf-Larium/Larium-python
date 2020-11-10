@@ -3,15 +3,15 @@ import time
 from datetime import datetime, timedelta
 # from os import path as Path
 from pathlib import Path
-from TickerFlask.data.loader import FileManager
+from data.loader import FileManager
 import pandas as pd
 import plotly.graph_objs as go
 import plotly.io as pio
 from plotly import subplots
-from TickerFlask import modules as timeutils
-import TickerFlask.modules.utils as utils
+import modules as timeutils
+import modules.utils as utils
 from config import config, root_path
-from TickerFlask.modules import OurTweepy
+from modules.our_tweepy import OurTweepy
 
 
 class TwitterMonitor(OurTweepy):

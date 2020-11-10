@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: tomotopy
+Version: 0.9.1
+Summary: Tomoto, The Topic Modeling Tool for Python
+Home-page: https://github.com/bab2min/tomotopy
+Author: bab2min
+Author-email: bab2min@gmail.com
+License: MIT License
+Requires-Dist: py-cpuinfo
+Requires-Dist: numpy (>=1.10.0)
+
+What is tomotopy?
+
+

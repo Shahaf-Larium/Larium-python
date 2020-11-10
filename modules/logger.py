@@ -1,6 +1,6 @@
 from config import config, root_path
 from pathlib import Path
-import TickerFlask.modules.utils as utils
+import modules.utils as utils
 from datetime import datetime
 import pandas as pd
 pd.options.plotting.backend = "plotly"

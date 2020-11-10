@@ -5,8 +5,8 @@ from cassandra import RequestExecutionException
 from cassandra.query import dict_factory
 from config import root_path
 
-from TickerFlask.dbConnector import Queries
-from TickerFlask.dbConnector.tweetsIdForSymbol import tweetsIds
+from dbConnector import Queries
+from dbConnector.tweetsIdForSymbol import tweetsIds
 
 
 class DbConnector:

@@ -5,7 +5,7 @@ import pandas as pd
 import tweepy  # Has 7 days old limitation
 from pandas.io.json import json_normalize
 
-from TickerFlask.modules.timeutils import now
+from modules.timeutils import now
 from config import config
 
 

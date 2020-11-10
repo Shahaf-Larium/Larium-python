@@ -4,14 +4,14 @@ import time
 from datetime import datetime
 from pathlib import Path
 import pandas as pd
-import TickerFlask.modules.utils as utils
+import modules.utils as utils
 from config import config, root_path
 #from products.event_detector.twitter_monitor import TwitterMonitor
-from TickerFlask.products import Pulse
-from TickerFlask.products import Analyzer
-from TickerFlask.products import get_most_retweeted
-from TickerFlask.dbConnector.DbConnectorCassandra import DbConnector
-from TickerFlask import dbConnector as query
+from products.pulse import Pulse
+from products.event_detector.volume_analyzer import Analyzer
+from products.insights_generator.bottom_line import get_most_retweeted
+from dbConnector.DbConnectorCassandra import DbConnector
+from dbConnector import Queries as query
 
 
 class WebInterface:

@@ -12,16 +12,16 @@ Use 'talk_to_me' to get an answer from the module contains the following:
 '''
 from pathlib import Path
 import math
-import TickerFlask.modules.pdutils as pdutils
-from TickerFlask.modules.timeutils import day_format, today, tprint, now, floor_dt
+import modules.pdutils as pdutils
+from modules.timeutils import day_format, today, tprint, now, floor_dt
 from config import config, root_path
-from TickerFlask.products.event_detector.volume_analyzer import Analyzer
-from TickerFlask import products as bottom_line
-from TickerFlask.data.loader import FileManager
+from products.event_detector.volume_analyzer import Analyzer
+import products as bottom_line
+from data.loader import FileManager
 from time import sleep
 import traceback
-from TickerFlask.modules.our_tweepy import OurTweepy
-from TickerFlask.modules.DataManager import DataManager
+from modules.our_tweepy import OurTweepy
+from modules.DataManager import DataManager
 
 
 class Pulse:

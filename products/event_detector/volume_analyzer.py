@@ -7,7 +7,7 @@ pd.options.plotting.backend = "plotly"
 import plotly.io as pio
 
 pio.renderers.default = "browser"
-from TickerFlask.modules.timeutils import today, floor_dt, now
+from modules.timeutils import today, floor_dt, now
 
 
 def get_tweets_volume(df_tweets, interval):
