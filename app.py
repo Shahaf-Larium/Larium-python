@@ -6,7 +6,7 @@ from products.pulse import Pulse
 
 app = Flask(__name__)
 
-pulse = Pulse(verbose=True)
+pulse = Pulse()
 
 
 @app.route('/')
