@@ -1,12 +1,10 @@
 from threading import Thread
-
 from flask import Flask
 
 from products.pulse import Pulse
 
 app = Flask(__name__)
-
-pulse = Pulse()
+pulseIns = Pulse()
 
 
 @app.route('/')
@@ -17,7 +15,7 @@ def home():
 
 @app.route('/pulse')
 def pulse():
-    thread = Thread(target=pulse.inc())
+    thread = Thread(target=pulseIns.inc)
     thread.daemon = True
 
     thread.start()
