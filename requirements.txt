@@ -14,7 +14,7 @@ funcy==1.15
 future==0.16.0
 geomet==0.2.1.post1
 GetOldTweets3==0.0.11
-gunicorn==20.0.4
+gunicorn
 idna==2.10
 importlib-metadata==2.0.0
 iniconfig==1.1.1
