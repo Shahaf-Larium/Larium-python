@@ -17,8 +17,8 @@ def home():
 
 @app.route('/pulse')
 def pulse():
-    thread = Thread(target=pulse.inc)
-    thread.daemon=True
+    thread = Thread(target=pulse.inc())
+    thread.daemon = True
 
     thread.start()
     return 'Pulse started'
