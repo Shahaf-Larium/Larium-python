@@ -6,7 +6,7 @@ import tweepy  # Has 7 days old limitation
 from pandas.io.json import json_normalize
 from config import config
 from modules.timeutils import *
-# from config import access_token_secret, access_token, consumer_secret, consumer_key
+from config import access_token_secret, access_token, consumer_secret, consumer_key
 
 class OurTweepy(object):
     '''
@@ -18,10 +18,10 @@ class OurTweepy(object):
         Class constructor or initialization method.
         '''
         # keys and tokens from the Twitter Dev Console
-        consumer_key = 'p8lA0TpForYSBnbLCTNLpFMn3'
-        consumer_secret = 'weBxKVnLcTdanGxrzDQ2kF6WTkaIIHL43OwsaNQfmMkOgpEbE9'
-        access_token = '1208323412042698753-LGQw8VUOK1Jm3dORVW8HCugSVdgYeb'
-        access_token_secret = 'ce6QXKBRxjqgLmxhRgVvzbgS79mdvuIdgoylQBj8rTyVq'
+        # consumer_key = 'p8lA0TpForYSBnbLCTNLpFMn3'
+        # consumer_secret = 'weBxKVnLcTdanGxrzDQ2kF6WTkaIIHL43OwsaNQfmMkOgpEbE9'
+        # access_token = '1208323412042698753-LGQw8VUOK1Jm3dORVW8HCugSVdgYeb'
+        # access_token_secret = 'ce6QXKBRxjqgLmxhRgVvzbgS79mdvuIdgoylQBj8rTyVq'
         self.verbose = verbose
         self.tweepy_date_time_format = config['tweepy']['general']['datetime_format']
         self.tweepy_time_zone = config['tweepy']['general']['timezone']
