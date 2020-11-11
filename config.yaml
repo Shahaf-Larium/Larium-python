@@ -1,0 +1,58 @@
+databases:
+    tweets:
+        archive : "data/tweets/archive"
+        recent: "data/tweets/recent"
+        stocks: "data/tweets/stocks"
+logs:
+    monitor:
+        stats: "logs/monitor/stats"
+
+stocks:
+         - NKLA
+         - PENN
+         - OGI
+         - TSLA
+         - HCAC
+         - APHA
+         - KODK
+         - AYRO
+         - ALYI
+         - SHLL
+         - SPAQ
+         - RCL
+         - SPCE
+         - AZN
+         - MRNA
+         - AMZN
+         - RCL
+         - BABA
+         - ZM
+         - NFLX
+         - HIBB
+         - ETSY
+         - REGN
+         - DKNG
+         - RWLK
+
+tweepy:
+    general:
+        datetime_format: '%a %b %d %H:%M:%S +0000 %Y'   # this is the default datetime format of the created_at column.
+        timezone: 'UTC'                                 # this is the default time zone of the created_at column.
+    limitations:
+        max_requests_per_interval: 180 # TODO check with higher limit.
+        interval: 15 # minutes
+    our_api:
+        datetime_index_name: 'dt_index'
+
+web_interface:
+    logs:
+        folder: "logs/web_interface/"
+    json:
+        file: "web_interface/tableStocksData.json"
+        name: "ticker_list"
+        headers:
+            - "stock"
+            - "interest"
+            - "change"
+            - "most_active"
+            - "event"
