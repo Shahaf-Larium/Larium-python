@@ -22,5 +22,11 @@ def pulse():
     return 'Pulse started'
 
 
+@app.route('/stopPulse')
+def stop_pulse():
+    pulseIns.stop = True
+    return 'Pulse stopped'
+
+
 if __name__ == '__main__':
     app.run(threaded=True)

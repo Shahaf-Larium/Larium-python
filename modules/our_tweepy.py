@@ -8,6 +8,7 @@ from config import config
 from modules.timeutils import *
 from config import access_token_secret, access_token, consumer_secret, consumer_key
 
+
 class OurTweepy(object):
     '''
     Our Twitter API class.
@@ -47,7 +48,8 @@ class OurTweepy(object):
         try:
             # call twitter api to fetch tweets
             if since_id:
-                fetched_tweets = self.api.search(q=query, count=n, result_type="recent", since_id=since_id, tweet_mode='extended')
+                fetched_tweets = self.api.search(q=query, count=n, result_type="recent", since_id=since_id,
+                                                 tweet_mode='extended')
             else:
                 fetched_tweets = self.api.search(q=query, count=n, result_type="recent", tweet_mode='extended')
             time.sleep(0.5)
@@ -82,12 +84,13 @@ class OurTweepy(object):
         df = json_normalize(self.search_results_to_list(sr))
         if 'created_at' in df.columns:
             df['created_at'] = pd.to_datetime(df['created_at'],
-                                             format=self.tweepy_date_time_format)  # TODO legacy -> remove
-            created_at = pd.DatetimeIndex(  pd.to_datetime(df['created_at'], format=self.tweepy_date_time_format),
-                                            name=config['tweepy']['our_api']['datetime_index_name']).tz_localize(self.tweepy_time_zone)
-            df = df.set_index(created_at).\
-                    drop(['created_at'], axis=1).\
-                    sort_index(ascending=False)
+                                              format=self.tweepy_date_time_format)  # TODO legacy -> remove
+            created_at = pd.DatetimeIndex(pd.to_datetime(df['created_at'], format=self.tweepy_date_time_format),
+                                          name=config['tweepy']['our_api']['datetime_index_name']).tz_localize(
+                self.tweepy_time_zone)
+            df = df.set_index(created_at). \
+                drop(['created_at'], axis=1). \
+                sort_index(ascending=False)
             df['fetched_at'] = now()
         return df
 
