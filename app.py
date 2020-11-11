@@ -4,7 +4,7 @@ from flask import Flask
 from products.pulse import Pulse
 
 app = Flask(__name__)
-pulseIns = Pulse()
+pulseIns = Pulse(verbose=True)
 
 
 @app.route('/')
@@ -15,7 +15,7 @@ def home():
 
 @app.route('/pulse')
 def pulse():
-    thread = Thread(target=pulseIns.inc)
+    thread = Thread(target=pulseIns.run)
     thread.daemon = True
 
     thread.start()
