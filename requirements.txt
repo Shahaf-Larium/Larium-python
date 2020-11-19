@@ -63,3 +63,6 @@ wcwidth==0.1.9
 Werkzeug==1.0.1
 yfinance==0.1.54
 zipp==3.4.0
+
+boto3~=1.16.19
+s3fs~=0.5.1

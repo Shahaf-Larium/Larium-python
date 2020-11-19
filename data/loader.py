@@ -6,12 +6,14 @@ from pathlib import Path
 from datetime import datetime, timedelta
 import pandas as pd
 from config import config
+import data.s3_manager as s3
 
 
 class FileManager(TweetsLoader):
     '''
     This loader is for Tweepy created database.
     '''
+
     def __init__(self, database_folder, verbose=False):
         super().__init__(verbose=verbose)
         self.database_folder = Path(database_folder)
@@ -53,6 +55,7 @@ class FileManager(TweetsLoader):
                     already_exist_df = self.__load__(stock=stock, dates=[date])
                     df_to_save = pdutils.append(to=already_exist_df, append_me=df_to_save)
                 df_to_save.to_csv(str(file_path))
+                s3.save_to_s3(df_to_save, 'tweets/' + stock, str(file_path).split('\\')[-1])
 
             if self.verbose:
                 print("[FileManager] Saved {} tweets of {}".format(len(df_to_save.index), stock))
@@ -66,5 +69,5 @@ class FileManager(TweetsLoader):
         return base_folder / file_name
 
     def file_name(self, start, end):
-        return 'on_' + datetime.strftime(start, '%Y-%m-%d') + '_from_' + datetime.strftime(start, '%H-%M-%S') +\
-                '_to_' + datetime.strftime(end, '%H-%M-%S') + '.csv'
+        return 'on_' + datetime.strftime(start, '%Y-%m-%d') + '_from_' + datetime.strftime(start, '%H-%M-%S') + \
+               '_to_' + datetime.strftime(end, '%H-%M-%S') + '.csv'
