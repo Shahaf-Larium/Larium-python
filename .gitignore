@@ -301,3 +301,5 @@ modules.xml
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+secure-connect-ticker-db.zip
