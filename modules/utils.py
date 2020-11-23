@@ -3,6 +3,8 @@ from os import path as Path
 from datetime import datetime, timedelta
 from calendar import monthrange
 
+from pandas import date_range
+
 
 def filter_files(files_list, filters):
     result = []
@@ -65,3 +67,8 @@ def floor_dt(dt, on, to):
         new_val = dt.second - dt.second % to
         dt = dt.replace(second=new_val)
     return dt
+
+
+def dates_in_range(range):
+    dts = date_range(start=range[0], end=range[1])
+    return [day_format(d) for d in dts]

@@ -1,24 +1,25 @@
-from data.tweets_loader import TweetsLoader
-import modules.utils as utils
-import modules.timeutils as timeutils
-import modules.pdutils as pdutils
+from datetime import datetime
 from pathlib import Path
-from datetime import datetime, timedelta
-import pandas as pd
-from config import config
+
 import data.s3_manager as s3
+import modules.pdutils as pdutils
+import modules.timeutils as timeutils
+import modules.utils as utils
+from config import datetimeindex_format
 
 
-class FileManager(TweetsLoader):
+class FileManager:
     '''
     This loader is for Tweepy created database.
     '''
 
-    def __init__(self, database_folder, verbose=False):
-        super().__init__(verbose=verbose)
+    def __init__(self, database_folder, source_s3=False, verbose=False):
+        # super().__init__(verbose=verbose)
         self.database_folder = Path(database_folder)
+        self.source_s3 = source_s3
+        self.verbose = verbose
 
-    def __load__(self, stock, dates=None, datetimeindex=config['tweepy']['our_api']['datetime_index_name']):
+    def __load__(self, stock, dates=None, datetimeindex=datetimeindex_format):
         load_files = []
         base_folder = self.database_folder / stock
         utils.create_dir_if_not_exist(base_folder)
@@ -28,17 +29,34 @@ class FileManager(TweetsLoader):
         data = None
         for file_name in load_files:
             file_path = base_folder / file_name
-            if file_path.is_file():
-                df = pd.read_csv(str(file_path), index_col=datetimeindex, parse_dates=True)
-                if data is None:
-                    data = df
+            # if file_path.is_file():
+            try:
+                if self.source_s3:
+                    df = s3.load_tweet_data_from_s3(file_name=file_name, stock=stock)
                 else:
-                    data = data.append(df, sort=False)
-                    data = data.sort_index(ascending=False)
+                    df = pdutils.read_time_series(str(file_path), datetimeindex=datetimeindex)
+            except FileNotFoundError:
+                df = None
+
+            if data is None:
+                data = df
+            else:
+                data = pdutils.append(data, df)
+                # data = data.append(df, sort=False)
+                # data = data.sort_index(ascending=False)
         return data
 
-    def load(self, stock, dates=None, datetimeindex=config['tweepy']['our_api']['datetime_index_name']):
-        data = self.__load__(stock, dates, datetimeindex)
+    def load(self, stock, dates=None, datetimeindex=datetimeindex_format):
+        if type(dates) is str:
+            _dates = [dates]
+        elif type(dates) is tuple:
+            _dates = utils.dates_in_range(dates)
+        elif type(dates) is list:
+            _dates = dates
+        else:
+            raise TypeError("illegal type of dates argument.")
+
+        data = self.__load__(stock, _dates, datetimeindex)
         if data is not None and self.verbose:
             print("[FileManager] Loaded {} tweets of {}".format(len(data.index), stock))
         return data
@@ -51,11 +69,14 @@ class FileManager(TweetsLoader):
                 file_path = self.choose_file(stock, date)
                 utils.create_dir_if_not_exist(file_path.parent)
                 df_to_save = df.loc[date]
-                if append and file_path.is_file():
+                if append:
                     already_exist_df = self.__load__(stock=stock, dates=[date])
-                    df_to_save = pdutils.append(to=already_exist_df, append_me=df_to_save)
-                df_to_save.to_csv(str(file_path))
-                s3.save_to_s3(df_to_save, 'tweets/' + stock, str(file_path).split('\\')[-1])
+                    if already_exist_df:
+                        df_to_save = pdutils.append(to=already_exist_df, append_me=df_to_save)
+                if self.source_s3:
+                    s3.save_to_s3(df_to_save, 'tweets/' + stock, str(file_path).split('\\')[-1])
+                else:
+                    df_to_save.to_csv(str(file_path))
 
             if self.verbose:
                 print("[FileManager] Saved {} tweets of {}".format(len(df_to_save.index), stock))

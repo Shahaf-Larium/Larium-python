@@ -23,3 +23,6 @@ access_token_secret = 'eN4aFgzUstLsIiZy3d35u8ETYZwZXCMOdCnKOEFvv6v0t'
 KEY='AKIAR6LIIEWYT4TP4BSB'
 SECRET='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'
 s3_path = 's3://larium.bucket/'
+
+# General #
+datetimeindex_format = config['tweepy']['our_api']['datetime_index_name']
