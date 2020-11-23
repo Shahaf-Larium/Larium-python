@@ -1,8 +1,8 @@
 import boto3
 import s3fs
 
+import modules.pdutils as pdutils
 from config import KEY, SECRET, s3_path, datetimeindex_format
-from modules import pdutils
 
 s3 = boto3.resource('s3', aws_access_key_id=KEY, aws_secret_access_key=SECRET)
 myBucket = s3.Bucket('larium.bucket')
@@ -25,15 +25,14 @@ def init_directory_list(prefix):
 
 def load_tweet_data_from_s3(file_name, stock):
     """
-        :param file_name: The name of the csv file you wish too load
-        :param stock: Stock name you wish to get the csv from
-        :example:
-            fs.open('s3://larium.bucket/tweets/AAPL/11-11-20.csv', 'rb')
-        :return:
-            return the DataFrame
-        """
-    loaded_df = pdutils.read_time_series(fs.open(s3_path + 'tweets/' + stock + '/' + file_name, 'rb'),
-                                         datetimeindex=datetimeindex_format)
+    :param file_name: The name of the csv file you wish too load
+    :param stock: Stock name you wish to get the csv from
+    :example:
+        fs.open('s3://larium.bucket/tweets/AAPL/11-11-20.csv', 'rb')
+    :return:
+        return the DataFrame
+    """
+    loaded_df = pdutils.read_time_series(fs.open(s3_path + 'tweets/' + stock + '/' + file_name, 'rb'), datetimeindex=datetimeindex_format)
     return loaded_df
 
 
