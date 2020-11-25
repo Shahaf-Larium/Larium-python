@@ -71,7 +71,7 @@ class FileManager:
                 df_to_save = df.loc[date]
                 if append:
                     already_exist_df = self.__load__(stock=stock, dates=[date])
-                    if already_exist_df:
+                    if already_exist_df is not None:
                         df_to_save = pdutils.append(to=already_exist_df, append_me=df_to_save)
                 if self.source_s3:
                     s3.save_to_s3(df_to_save, 'tweets/' + stock, str(file_path).split('\\')[-1])
