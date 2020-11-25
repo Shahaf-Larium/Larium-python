@@ -14,7 +14,7 @@ from pathlib import Path
 import math
 from modules.timeutils import *
 import modules.pdutils as pdutils
-from config import config, root_path
+from config import config, root_path, stock_list
 from products.event_detector.volume_analyzer import Analyzer
 import products.insights_generator.bottom_line as bottom_line
 from data.loader import FileManager
@@ -23,15 +23,13 @@ import traceback
 from modules.our_tweepy import OurTweepy
 from modules.DataManager import DataManager
 
-
 class Pulse:
     def __init__(self, verbose=False):
-        self.stocks_list = config['stocks']  # TODO strange bug with date_time?!
+        self.stocks_list = stock_list  # TODO strange bug with date_time?!
         self.twitter_api = OurTweepy(verbose=verbose)
-        self.refresh_rate = math.ceil((60 * config['tweepy']['limitations']['interval'] / (
-                    config['tweepy']['limitations']['max_requests_per_interval'] / len(self.stocks_list))))
+        self.refresh_rate = math.ceil((60 * config['tweepy']['limitations']['interval'] / (config['tweepy']['limitations']['max_requests_per_interval'] / len(self.stocks_list))))
         self.stocks_dir = root_path / Path(config['databases']['tweets']['stocks'])
-        self.files_manager = FileManager(database_folder=self.stocks_dir, verbose=verbose)
+        self.files_manager = FileManager(database_folder=self.stocks_dir, source_s3=True, verbose=verbose)
         self.data_manager = DataManager()
         self.data = self.__initdata__()
         self.stop = False
@@ -46,10 +44,9 @@ class Pulse:
         '''
         data = {}
         for stock in self.stocks_list:
-            stock_tweets_df = self.files_manager.load(stock=stock,
-                                                      dates=[day_format(today())])  # load tweets from today (utc).
+            stock_tweets_df = self.files_manager.load(stock=stock, dates=[day_format(today())]) # load tweets from today (utc).
             if stock_tweets_df is None:
-                stock_tweets_df, len = self.twitter_api.get_n_last_tweets(query='$' + stock, n=5, df=True)
+                stock_tweets_df, len = self.twitter_api.get_n_last_tweets(query='$'+stock, n=5, df=True)
             data[stock] = stock_tweets_df
         return data
 
@@ -108,8 +105,7 @@ class Pulse:
         '''
         answer = dict.fromkeys(self.data.keys())
         for stock, df in self.data.items():
-            answer[stock] = {'stock': stock, 'is_event': False, 'events_data': None, 'daily_interset': 0,
-                             'last_interest': 0, 'current_change': 0, 'last_event': ""}
+            answer[stock] = {'stock': stock, 'is_event': False, 'events_data': None, 'daily_interset': 0, 'last_interest': 0, 'current_change': 0, 'last_event': ""}
             if not df.empty:
                 analyzer = Analyzer(ts=df.index.to_series(keep_tz=True))
                 answer[stock]['daily_interset'] = analyzer.get_interest(in_last='1d')
@@ -122,10 +118,3 @@ class Pulse:
         answer['fetched_at'] = now().strftime("%m/%d/%Y, %H:%M:%S")
         return answer
 
-# class Pulse:
-#     def __init__(self):
-#         self.count = 1
-#
-#     def inc(self):
-#         self.count += 1
-#         print(self.count)

@@ -7,32 +7,6 @@ logs:
     monitor:
         stats: "logs/monitor/stats"
 
-stocks:
-         - NKLA
-         - PENN
-         - OGI
-         - TSLA
-         - HCAC
-         - APHA
-         - KODK
-         - AYRO
-         - ALYI
-         - SHLL
-         - SPAQ
-         - SPCE
-         - AZN
-         - MRNA
-         - AMZN
-         - RCL
-         - BABA
-         - ZM
-         - NFLX
-         - HIBB
-         - ETSY
-         - REGN
-         - DKNG
-         - RWLK
-
 tweepy:
     general:
         datetime_format: '%a %b %d %H:%M:%S +0000 %Y'   # this is the default datetime format of the created_at column.
@@ -55,3 +29,172 @@ web_interface:
             - "change"
             - "most_active"
             - "event"
+
+stocks_dict:
+  hennessy_capital_acquisition:
+    key_words:
+      - ''
+    synanmous:
+      - 'Hennessy Capital Acquisition'
+    ticker: HCAC
+  alibaba:
+    key_words:
+      - ''
+    synanmous:
+      - 'Alibaba'
+      - 'Alibaba Group'
+      - 'Alibaba Group Holding Limited'
+      - 'Alibaba Group Holding'
+    ticker: BABA
+  alternet_systems:
+    key_words:
+      - ''
+    synanmous:
+      - 'Alternet Systems'
+      - ' Inc.'
+      - 'Alternet Systems'
+    ticker: ALYI
+  amazon:
+    key_words:
+      - aws
+    synanmous:
+      - Amazon
+    ticker: AMZN
+  aphria:
+    key_words:
+      - 'medical cannabis'
+    synanmous:
+      - Aphria
+      - 'apha'
+    ticker: APHA
+  astrazeneca:
+    key_words:
+      - ''
+    synanmous:
+      - 'Astrazeneca'
+      - 'Astrazeneca PLC'
+    ticker: AZN
+  ayro:
+    key_words:
+      - 'electric vehicles'
+    synanmous:
+      - ''
+    ticker: AYRO
+  draftkings:
+    key_words:
+      - ''
+    synanmous:
+      - ''
+    ticker: DKNG
+  etsy:
+    key_words:
+      - ''
+    synanmous:
+      - 'Etsy'
+    ticker: ETSY
+  hibbett_sports:
+    key_words:
+      - ''
+    synanmous:
+      - 'Hibbett Sports'
+    ticker: HIBB
+  kodak:
+    key_words:
+      - ''
+    synanmous:
+      - Kodak
+      - 'kodk'
+    ticker: KODK
+  moderna:
+    key_words:
+      - ''
+    synanmous:
+      - 'Moderna'
+    ticker: MRNA
+  netflix:
+    key_words:
+      - ''
+    synanmous:
+      - Netflix
+    ticker: NFLX
+  nikola:
+    key_words:
+      - ev
+      - 'motor'
+      - 'electric'
+      - 'semi-trucks'
+    synanmous:
+      - Nikola
+      - 'nkla'
+    ticker: NKLA
+  organigram:
+    key_words:
+      - ''
+    synanmous:
+      - OrganiGram
+      - 'OrganiGram Holdings'
+    ticker: OGI
+  penn:
+    key_words:
+      - ''
+    synanmous:
+      - 'Penn National Gaming'
+    ticker: PENN
+  regeneron:
+    key_words:
+      - ''
+    synanmous:
+      - 'Regeneron Pharmaceuticals'
+    ticker: REGN
+  rewalk:
+    key_words:
+      - ''
+    synanmous:
+      - 'ReWalk Robotics'
+    ticker: RWLK
+  royal_caribbean_cruises:
+    key_words:
+      - 'Cruises'
+    synanmous:
+      - 'Royal Caribbean Cruises'
+    ticker: RCL
+  spartan_energy_acquisition:
+    key_words:
+      - fisker
+    synanmous:
+      - 'Spartan Energy Acquisition'
+      - 'Spartan Energy Acquisition Corp'
+    ticker: SPAQ
+  tesla:
+    key_words:
+      - 'electric vehicle'
+      - 'clean energy'
+      - 'sustainable energy'
+      - 'Model Y'
+      - 'Model 3'
+      - 'Model S'
+    synanmous:
+      - Tesla
+      - ' tsla'
+    ticker: TSLA
+  tortoise_acquisition:
+    key_words:
+      - ''
+    synanmous:
+      - 'Tortoise Acquisition'
+      - 'Tortoise Acquisition Corp'
+    ticker: SHLL
+  virgin_galactic:
+    key_words:
+      - ''
+    synanmous:
+      - 'Virgin Galactic'
+      - 'Virgin Galactic Holdings'
+      - ' spce'
+    ticker: SPCE
+  zoom:
+    key_words:
+      - ''
+    synanmous:
+      - Zoom
+    ticker: ZM

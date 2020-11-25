@@ -1,4 +1,4 @@
-from config import config, root_path
+from config import config, root_path, stocks_list
 from pathlib import Path
 import modules.utils as utils
 from datetime import datetime
@@ -9,7 +9,7 @@ pio.renderers.default = "browser"
 
 class Logger():
     def __init__(self):
-        self.stocks_list = config['stocks']
+        self.stocks_list = stocks_list
         self.logs_folder = root_path / Path(config['web_interface']['logs']['folder'])
         self.logs_data = dict.fromkeys(self.stocks_list)
 
