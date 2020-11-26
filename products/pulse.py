@@ -14,7 +14,7 @@ from pathlib import Path
 import math
 from modules.timeutils import *
 import modules.pdutils as pdutils
-from config import config, root_path, stock_list
+from config import config, root_path, stocks_list
 from products.event_detector.volume_analyzer import Analyzer
 import products.insights_generator.bottom_line as bottom_line
 from data.loader import FileManager
@@ -25,7 +25,7 @@ from modules.DataManager import DataManager
 
 class Pulse:
     def __init__(self, verbose=False):
-        self.stocks_list = stock_list  # TODO strange bug with date_time?!
+        self.stocks_list = stocks_list  # TODO strange bug with date_time?!
         self.twitter_api = OurTweepy(verbose=verbose)
         self.refresh_rate = math.ceil((60 * config['tweepy']['limitations']['interval'] / (config['tweepy']['limitations']['max_requests_per_interval'] / len(self.stocks_list))))
         self.stocks_dir = root_path / Path(config['databases']['tweets']['stocks'])
