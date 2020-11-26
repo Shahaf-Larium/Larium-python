@@ -15,7 +15,7 @@ def save_to_s3(data, dir_path, file_name):
     bytes_to_write = data.to_csv(None).encode()
     with fs.open(s3_path + dir_path + '/' + file_name, 'wb') as f:
         f.write(bytes_to_write)
-        print("[S3 Manager] saved {}".format(dir_path))
+        print("[S3 Manager] saved {}".format(dir_path + file_name))
 
 
 def init_directory_list(prefix):
