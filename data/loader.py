@@ -73,7 +73,8 @@ class FileManager:
                     if already_exist_df is not None:
                         df_to_save = pdutils.append(to=already_exist_df, append_me=df_to_save)
                 if self.source_s3:
-                    s3.save_to_s3(df_to_save, 'tweets/' + stock, str(file_path).split('\\')[-1])
+                    file_name = str(file_path).split('\\')[-1] if '\\' in str(file_path) else str(file_path).split('/')[-1]
+                    s3.save_to_s3(df_to_save, 'tweets/' + stock, file_name)
                 else:
                     df_to_save.to_csv(str(file_path))
 
