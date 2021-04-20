@@ -35,7 +35,7 @@ pandas==0.25.3
 pathspec==0.5.9
 plotly==4.9.0
 pluggy==0.13.1
-py==1.9.0
+py==1.10.0
 py-cpuinfo==7.0.0
 pyLDAvis==2.1.2
 pyparsing==2.4.7
