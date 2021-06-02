@@ -57,7 +57,7 @@ toml==0.10.2
 tomotopy==0.9.1
 tqdm==4.51.0
 tweepy==3.8.0
-urllib3==1.25.11
+urllib3==1.26.5
 utils==1.0.1
 wcwidth==0.1.9
 Werkzeug==1.0.1
